@@ -1,1 +1,1 @@
-# LABORATORIO 01-Sistema de Matriculas
+# LABORATORIO 01 -> Sistema de Matriculas
