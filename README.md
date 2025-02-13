@@ -11,7 +11,10 @@
 # Casos de Uso
 [Casos de Uso](Documentação/sistemaDeMatriculas.pdf)
 
-<img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/sistemaDeMatriculas.pdf" alt="Casos de Uso">
+<div>
+  <img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/sistemaDeMatriculas.pdf" alt="Casos de Uso">
+</div>
+
 
 # Histórias de Usuário:
 - Como aluno, eu quero me cadastrar no sistema informando meus dados pessoais, para que eu possa acessar os serviços oferecidos.
