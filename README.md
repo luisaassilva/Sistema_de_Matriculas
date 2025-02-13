@@ -12,7 +12,7 @@
 [Casos de Uso](Documentação/sistemaDeMatriculas.pdf)
 
 <div>
-  <img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/sistemaDeMatriculas.pdf" alt="Casos de Uso">
+  <img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/Sistema%20de%20Matrículas.jpg" alt="Casos de Uso">
 </div>
 
 
