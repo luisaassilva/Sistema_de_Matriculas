@@ -11,7 +11,7 @@
 # Casos de Uso
 [Casos de Uso](Documentação/sistemaDeMatriculas.pdf)
 
-<img src="Documentação/sistemaDeMatriculas.pdf" alt="Casos de Uso">
+<img src="Sistema_de_Matriculas/Documentação/sistemaDeMatriculas.pdf" alt="Casos de Uso">
 
 # Histórias de Usuário:
 - Como aluno, eu quero me cadastrar no sistema informando meus dados pessoais, para que eu possa acessar os serviços oferecidos.
