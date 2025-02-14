@@ -1,4 +1,5 @@
 # LABORATORIO 01 -> Sistema de Matriculas
+Este repositório contém o trabalho em grupo realizado para a disciplina "Laboratório de Desenvolvimento de Software", do 4º período do curso de Engenharia de Software da PUC - Minas.
 
 # Integrantes
 - Débora Campos Sigaud
@@ -14,7 +15,7 @@
 
 
 
-# Histórias de Usuário:
+# Histórias de Usuário
 - Como aluno, eu quero me cadastrar no sistema informando meus dados pessoais, para que eu possa acessar os serviços oferecidos.
 - Como aluno, eu quero cancelar minha matricula, para que facilite o processo de cancelamento da mesma.
 - Como aluno. eu quero me cadastrar em uma matricula optativa, para que fique separado minhas disciplinas obrigatórias e optativas.
