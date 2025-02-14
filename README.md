@@ -10,7 +10,7 @@
 
 # Casos de Uso
   <img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/Sistema%20de%20Matrículas.png" alt="Casos de Uso">
- - Template do Figma[Template do Figma](https://www.figma.com/board/qPDxQzaTfczsEQoSPJ8Hol/Sistema-de-Matr%C3%ADculas?node-id=0-1&t=hFg3s00BpGUwhGO7-1)
+ - [Template do Figma](https://www.figma.com/board/qPDxQzaTfczsEQoSPJ8Hol/Sistema-de-Matr%C3%ADculas?node-id=0-1&t=hFg3s00BpGUwhGO7-1)
 
 
 
