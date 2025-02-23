@@ -25,3 +25,7 @@ Este repositório contém o trabalho em grupo realizado para a disciplina "Labor
 - Como professor, eu quero visualizar a lista de materias que irei lecionar, para que eu possa acompanhar quais materias possuo em minha grade.
 - Como secretário, eu quero gerenciar usuários no sistema, para que alunos, professores e administradores tenham os acessos corretos de acordo com suas funções.
 - Como secretário, preciso conseguir gerar cúrriculo das disciplinas, para poder enviar aos alunos caso seja necessário.
+
+# Diagrama de Classes
+  <img src="https://github.com/maraclaras/Sistema_de_Matriculas/blob/main/Documentação/Diagrama%20de%20Classes.png" alt="Diagrama de Classes">
+
