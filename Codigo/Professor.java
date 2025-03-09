@@ -5,24 +5,25 @@ import java.util.List;
 public class Professor {
     private String nome;
     private String senha;
+    private List<Disciplina> disciplinas;
 
     public Professor(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
     }
 
-    public void listarAluno(List<Aluno> alunos) {
-        for (Aluno aluno : alunos) {
-            for (Disciplina disciplina : aluno.getDisciplinas()) {
-                if (disciplina.getProfessor() != null && disciplina.getProfessor().getNome().equals(this.nome)) {
-                    System.out.println(aluno.getNome());
-                    break;
-                }
-            }
-        }
-    }
-
     public String getNome() {
         return nome;
+    }
+
+    public void listarAlunosDisciplina(Disciplina disciplina) {
+        System.out.println("Alunos matriculados em " + disciplina.getNome() + ":");
+        for (Aluno aluno : disciplina.getAlunosMatriculados()) {
+            System.out.println(aluno.getNome());
+        }
+    }
+    
+    public boolean autenticar(String senha) {
+        return this.senha.equals(senha);
     }
 }
