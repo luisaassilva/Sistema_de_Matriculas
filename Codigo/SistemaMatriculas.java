@@ -74,10 +74,7 @@ public class SistemaMatriculas {
         String nome = scanner.nextLine();
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
-        System.out.print("Mensalidade: ");
-        int mensalidade = scanner.nextInt();
-        scanner.nextLine();
-        alunos.add(new Aluno(nome, senha, mensalidade));
+        alunos.add(new Aluno(nome, senha));
         System.out.println("Aluno cadastrado com sucesso!");
     }
 
@@ -181,7 +178,9 @@ public class SistemaMatriculas {
     private static void cadastrarDisciplina(Scanner scanner) {
         System.out.print("Digite o nome da disciplina: ");
         String nome = scanner.nextLine();
-        disciplinas.add(new Disciplina(nome));
+        System.out.print("Digite o valor da disciplina: ");
+        int valor = scanner.nextInt();
+        disciplinas.add(new Disciplina(nome, valor));
         System.out.println("Disciplina cadastrada com sucesso!");
     }
     

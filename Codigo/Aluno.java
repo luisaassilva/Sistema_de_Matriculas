@@ -12,11 +12,11 @@ public class Aluno {
     private static final int MAX_OPTATIVAS = 2;
     private List<Disciplina> disciplinasMatriculadas;
 
-    public Aluno(String nome, String senha, int mensalidade) {
+    public Aluno(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
-        this.mensalidade = mensalidade;
         this.disciplinas = new ArrayList<>();
+        this.disciplinasMatriculadas = new ArrayList<>();
     }
 
     public boolean cadastrarDisciplina(Disciplina disciplina, boolean obrigatoria) {

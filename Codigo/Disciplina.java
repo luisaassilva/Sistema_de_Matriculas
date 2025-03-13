@@ -12,15 +12,10 @@ public class Disciplina {
     private static final int MIN_ALUNOS = 3;
     private static final int MAX_ALUNOS = 60;
 
-    public Disciplina(String nome, String id, int valor) {
-        this.nome = nome;
-        this.id = id;
-        this.valor = valor;
-        this.alunosMatriculados = new ArrayList<>();
-    }
 
-    public Disciplina(String nome) {
+    public Disciplina(String nome, int valor) {
         this.nome = nome;
+        this.valor = valor;
         this.alunosMatriculados = new ArrayList<>();
     }
 
