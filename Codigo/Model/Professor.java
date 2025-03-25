@@ -1,4 +1,4 @@
-package Codigo;
+package Codigo.Model;
 
 import java.util.List;
 

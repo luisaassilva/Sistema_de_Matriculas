@@ -1,4 +1,4 @@
-package Codigo;
+package Codigo.Model;
 
 public class Curso {
     private String nome;

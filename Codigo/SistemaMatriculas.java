@@ -3,19 +3,18 @@ package Codigo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.*;
 
 public class SistemaMatriculas {
-    private static List<Aluno> alunos = new ArrayList<>();
-    private static List<Professor> professores = new ArrayList<>();
-    private static List<Curso> cursos = new ArrayList<>();
-    private static List<Disciplina> disciplinas = new ArrayList<>();
+    private static AlunoDAO alunoDAO = new InMemoryAlunoDAO();
+    private static ProfessorDAO professorDAO = new InMemoryProfessorDAO();
+    private static CursoDAO cursoDAO = new InMemoryCursoDAO();
+    private static DisciplinaDAO disciplinaDAO = new InMemoryDisciplinaDAO();
+    private static MatriculaService matriculaService = new MatriculaService(alunoDAO, professorDAO, cursoDAO, disciplinaDAO);
 
     public static void main(String[] args) {
-        carregarDados();
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        
+
         do {
             System.out.println("\nSistema de Matrículas");
             System.out.println("1. Cadastrar Aluno");
@@ -74,11 +73,12 @@ public class SistemaMatriculas {
         String nome = scanner.nextLine();
         System.out.print("Senha: ");
         String senha = scanner.nextLine();
-        alunos.add(new Aluno(nome, senha));
+        matriculaService.cadastrarAluno(nome, senha);
         System.out.println("Aluno cadastrado com sucesso!");
     }
 
     private static void listarAlunos() {
+        List<Aluno> alunos = matriculaService.listarAlunos();
         if (alunos.isEmpty()) {
             System.out.println("Nenhum aluno cadastrado.");
         } else {
@@ -95,11 +95,12 @@ public class SistemaMatriculas {
         System.out.print("Créditos: ");
         int credito = scanner.nextInt();
         scanner.nextLine();
-        cursos.add(new Curso(nome, credito));
+        matriculaService.cadastrarCurso(nome, credito);
         System.out.println("Curso cadastrado com sucesso!");
     }
 
     private static void listarCursos() {
+        List<Curso> cursos = matriculaService.listarCursos();
         if (cursos.isEmpty()) {
             System.out.println("Nenhum curso cadastrado.");
         } else {
@@ -110,138 +111,63 @@ public class SistemaMatriculas {
         }
     }
 
-    private static void carregarDados() {
-        // Simulação de persistência - carregamento futuro
-        System.out.println("[Simulação] Dados carregados.");
-    }
-
-    private static void salvarDados() {
-        // Simulação de persistência - salvamento futuro
-        System.out.println("[Simulação] Dados salvos.");
-    }
-    
-    private static Aluno buscarAluno(String nome) {
-        for (Aluno aluno : alunos) {
-            if (aluno.getNome().equalsIgnoreCase(nome)) {
-                return aluno;
-            }
-        }
-        return null;
-    }
-
-    private static Disciplina buscarDisciplina(String nome) {
-        for (Disciplina disciplina : disciplinas) {
-            if (disciplina.getNome().equalsIgnoreCase(nome)) {
-                return disciplina;
-            }
-        }
-        return null;
-    }
-
-    private static void matricularAluno(Scanner scanner) {
-        System.out.print("Digite o nome do aluno: ");
-        String nomeAluno = scanner.nextLine();
-        Aluno aluno = buscarAluno(nomeAluno);
-        
-        if (aluno == null) {
-            System.out.println("Aluno não encontrado.");
-            return;
-        }
-        
-        System.out.println("Escolha até 4 disciplinas obrigatórias e 2 optativas:");
-        for (Disciplina disciplina : disciplinas) {
-            System.out.println("- " + disciplina.getNome());
-        }
-        
-        for (int i = 0; i < 6; i++) {
-            System.out.print("Digite o nome da disciplina: ");
-            String nomeDisciplina = scanner.nextLine();
-            Disciplina disciplina = buscarDisciplina(nomeDisciplina);
-            
-            if (disciplina == null) {
-                System.out.println("Disciplina não encontrada.");
-                continue;
-            }
-            
-            if (disciplina.getAlunosMatriculados().size() >= 60) {
-                System.out.println("Disciplina lotada.");
-                continue;
-            }
-            
-            aluno.matricularEmDisciplina(disciplina);
-            disciplina.adicionarAluno(aluno);
-        }
-        
-        notificarCobranca(aluno);
-    }
-
     private static void cadastrarDisciplina(Scanner scanner) {
         System.out.print("Digite o nome da disciplina: ");
         String nome = scanner.nextLine();
         System.out.print("Digite o valor da disciplina: ");
         int valor = scanner.nextInt();
-        disciplinas.add(new Disciplina(nome, valor));
+        scanner.nextLine(); // Consume newline
+        matriculaService.cadastrarDisciplina(nome, valor);
         System.out.println("Disciplina cadastrada com sucesso!");
     }
-    
+
+    private static void matricularAluno(Scanner scanner) {
+        System.out.print("Digite o nome do aluno: ");
+        String nomeAluno = scanner.nextLine();
+
+        System.out.println("Digite os nomes das disciplinas para matricular (separadas por vírgula):");
+        String disciplinasInput = scanner.nextLine();
+        String[] nomesDisciplinas = disciplinasInput.split(",");
+        List<String> disciplinasParaMatricular = new ArrayList<>();
+        for (String nomeDisciplina : nomesDisciplinas) {
+            disciplinasParaMatricular.add(nomeDisciplina.trim());
+        }
+
+        matriculaService.matricularAluno(nomeAluno, disciplinasParaMatricular);
+    }
+
     private static void cancelarMatricula(Scanner scanner) {
         System.out.print("Digite o nome do aluno: ");
         String nomeAluno = scanner.nextLine();
-        Aluno aluno = buscarAluno(nomeAluno);
-        
-        if (aluno == null) {
-            System.out.println("Aluno não encontrado.");
-            return;
-        }
-        
-        System.out.println("Disciplinas matriculadas:");
-        for (Disciplina disciplina : aluno.getDisciplinas()) {
-            System.out.println("- " + disciplina.getNome());
-        }
-        
         System.out.print("Digite o nome da disciplina para cancelar: ");
         String nomeDisciplina = scanner.nextLine();
-        Disciplina disciplina = buscarDisciplina(nomeDisciplina);
-        
-        if (disciplina == null) {
-            System.out.println("Disciplina não encontrada.");
-            return;
-        }
-        
-        aluno.cancelarDisciplina(disciplina);
-        disciplina.removerAluno(aluno);
-        System.out.println("Matrícula cancelada com sucesso.");
+        matriculaService.cancelarMatricula(nomeAluno, nomeDisciplina);
     }
-    
+
     private static void listarDisciplinasAtivas() {
-        System.out.println("Disciplinas ativas no próximo semestre:");
-        for (Disciplina disciplina : disciplinas) {
-            if (disciplina.getAlunosMatriculados().size() >= 3) {
+        List<Disciplina> disciplinasAtivas = matriculaService.listarDisciplinasAtivas();
+        if (disciplinasAtivas.isEmpty()) {
+            System.out.println("Nenhuma disciplina ativa no momento.");
+        } else {
+            System.out.println("Disciplinas ativas:");
+            for (Disciplina disciplina : disciplinasAtivas) {
                 System.out.println("- " + disciplina.getNome());
             }
         }
     }
-    
+
     private static void consultarMatriculas(Scanner scanner) {
         System.out.print("Digite o nome da disciplina: ");
         String nomeDisciplina = scanner.nextLine();
-        Disciplina disciplina = buscarDisciplina(nomeDisciplina);
-        
-        if (disciplina == null) {
-            System.out.println("Disciplina não encontrada.");
-            return;
-        }
-        
-        System.out.println("Alunos matriculados na disciplina "+ disciplina.getNome() + ":");
-        for (Aluno aluno : disciplina.getAlunosMatriculados()) {
-            System.out.println("- " + aluno.getNome());
+        List<Aluno> alunosMatriculados = matriculaService.consultarMatriculas(nomeDisciplina);
+
+        if (alunosMatriculados == null || alunosMatriculados.isEmpty()) {
+            System.out.println("Nenhum aluno matriculado nesta disciplina.");
+        } else {
+            System.out.println("Alunos matriculados na disciplina " + nomeDisciplina + ":");
+            for (Aluno aluno : alunosMatriculados) {
+                System.out.println("- " + aluno.getNome());
+            }
         }
     }
-    
-    private static void notificarCobranca(Aluno aluno) {
-        System.out.println("Notificando sistema de cobranças para o aluno: " + aluno.getNome());
-    }
-    
-    
-    
 }
